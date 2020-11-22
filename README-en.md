@@ -59,7 +59,7 @@ This project is divided into three parts:
 
 💡 Both Frontend and Mobile need the Backend to be running to work.
 
-### Pré-requisitos
+### Prerequisites
 
 Before you begin, you will need to have the following tools installed on your machine:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [Expo-Cli](https://docs.expo.io/workflow/expo-cli/).
