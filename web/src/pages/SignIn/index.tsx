@@ -80,7 +80,7 @@ const SignIn: React.FC = () => {
                   disabled={loading}
                 />
 
-                <a href="/">Esqueci minha senha</a>
+                <a href="/forgotpassword">Esqueci minha senha</a>
              </OptionsBlock>
 
             <Button
