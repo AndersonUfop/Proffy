@@ -1,11 +1,21 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 
+import lightTheme from './styles/themes/light';
+import GlobalStyles from './styles/global';
 import Routes from './pages/router';
-import './assets/styles/global.css'
+
+
 
 function App() {
   return (
-    < Routes />
+    <ThemeProvider theme={lightTheme}>
+      <BrowserRouter>
+        <Routes />
+        <GlobalStyles />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
