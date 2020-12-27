@@ -1,24 +1,52 @@
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {Link} from 'react-router-dom';
 
-import logoImg from '../../assets/images/logo.svg';
-import Input from '../../components/Input';
 
-import backIcon from '../../assets/images/icons/back.svg';
-
-
-import './styles.css';
+import { ProffyLogo } from '../../assets/images';
+import { BackIcon } from '../../assets/images/icons'
 
 
-function SignUp() {
+import {Container, Content, Info, Form } from './styles';
+import { FormHandles } from '@unform/core';
+import InputForm from '../../components/InputForm';
+import Button from '../../components/Button';
+
+interface SignUpFormData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+}
+
+
+const SignUp: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+  const [ loading, setLoading ] = useState(false);
+  const [ showSuccess, setShowSuccess] = useState(false);
+  const [submitAvailable, setSubmitAvailable] = useState(false);
+
+  const handleInputOnChange = useCallback(() => {
+    const data = formRef.current?.getData() as SignUpFormData;
+
+    if (data?.first_name && data?.last_name && data?.email && data?.password) {
+      setSubmitAvailable(true);
+      return;
+    }
+
+    setSubmitAvailable(false);
+  }, []);
+
+
     return (
-        <div id="Container">
-          <div id="Content">
-          
-          <div id="Form">
+        <Container>
+          <Content>
+            <Form 
+              ref={formRef} 
+              onSubmit={() => {}}
+              >
 
-            <Link to="/SignIn">
-              <img src={backIcon} alt="Voltar"/>
+            <Link to="/">
+              <BackIcon/>
             </Link>
 
             <h1>Cadastro</h1>
@@ -27,49 +55,58 @@ function SignUp() {
               <br /> para começar.
             </span>
 
-            <Input 
-                name="nome"
+            <InputForm
+                name="first_name"
                 placeholder="Nome"
-                type="text"
+                autoFocus
+                disabled={loading}
+                onChange={handleInputOnChange}
             />
 
-            <Input 
-                name="sobrenome"
+            <InputForm
+                name="last_name"
                 placeholder="Sobrenome"
-                type="text"
+                disabled={loading}
+                onChange={handleInputOnChange}
             /> 
 
-            <Input 
+            <InputForm
                 name="email"
                 placeholder="E-mail"
                 type="email"
+                disabled={loading}
+                onChange={handleInputOnChange}
             />
 
-            <Input 
+            <InputForm
                 name="password"
                 placeholder="Senha"
                 type="password"
+                disabled={loading}
+                onChange={handleInputOnChange}
             />
 
 
-            <div id="ButtonEntrar">
-                <button>Concluir Cadastro</button>
-            </div>
-            
-          </div>
-  
-        </div>
+            <Button
+             isLoading={loading}
+             disabled={loading || !submitAvailable}
+             type="submit"
+            >
+              Concluir cadastro
+            </Button>
+          </Form>
+        </Content>
         
-        <div id="Info">
+        <Info>
           <div>
-            <img id="svg" src={logoImg}/>
+            <ProffyLogo/>
             <h2>
               Sua plataforma de <br />
               estudos online.
             </h2>
           </div>
-        </div>
-      </div>
+        </Info>
+      </Container>
     );
 }
 
