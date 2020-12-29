@@ -1,15 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
-import logoImg from '../../assets/images/logo.svg';
-import landingImg from '../../assets/images/landing.svg';
+import { 
+  LandingImg, 
+  ProffyLogo 
+} from '../../assets/images';
 
-import studyIcon from '../../assets/images/icons/study.svg';
-import giveClassesIcon from '../../assets/images/icons/give-classes.svg';
-import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
+import { 
+  GiveClassesIcon, 
+  PurpleHeartIcon, 
+  SignOutIcon, 
+  StudyIcon 
+} from '../../assets/images/icons';
 
-import './styles.css';
+import ProfileImage from '../../assets/images/euzasso.png';
+
+import { 
+  Container, 
+  TopContent, 
+  Header, 
+  LogoContainer, 
+  InfoContainer, 
+  Footer, 
+  ButtonsContainer 
+} from './styles';
 import api from '../../services/api';
+import Button from '../../components/Button';
 
 function Landing() {
   const [ totalConnections, setTotalConnections ] = useState(0);
@@ -23,35 +39,54 @@ function Landing() {
   }, []);
 
   return (
-    <div id="page-landing">
-      <div id="page-landing-content" className="container">
-        <div className="logo-container">
-          <img src={logoImg} alt="Proffy"/>
-          <h2>Sua plataforma de estudos online.</h2>
-        </div>
+    <Container>
+      <TopContent>
+          <Header>
+            <Link to="/">
+              <img src={ProfileImage} alt="Profile"/>
+              <span>Nome</span>
+            </Link>
 
-        <img src={landingImg} 
-          alt="Plataforma de estudos" 
-          className="hero-image"
-        />
+              <button>
+                <SignOutIcon />
+              </button>
+          </Header>
 
-        <div className="buttons-container">
-          <Link to="/study" className="study">
-            <img src={studyIcon} alt="Estudar" />
+          <LogoContainer>
+            <div>
+              <ProffyLogo />
+              <h1>Sua plataforma de estudos online.</h1>
+            </div>
+
+            <LandingImg/>
+          </LogoContainer>
+      </TopContent>
+      <Footer>
+        <InfoContainer>
+          <h2>
+            Seja bem vindo,
+            <strong>O que deseja fazer ?</strong>
+          </h2>
+
+          <small>
+            Total de {totalConnections} conexões já realizadas.
+            <PurpleHeartIcon/>
+          </small>
+        </InfoContainer>
+
+        <ButtonsContainer>
+          <Button>
+            <StudyIcon/>
             Estudar
-          </Link>
+          </Button>
 
-          <Link to="/give-classes" className="give-classes">
-            <img src={giveClassesIcon} alt="Dar aulas" />
+          <Button>
+            <GiveClassesIcon/>
             Dar aulas
-          </Link>
-        </div>
-
-        <span className="total-connections">
-          Total de {totalConnections} conexões já realizadas<img src={purpleHeartIcon} alt="Coração roxo"></img>
-        </span>
-      </div>
-    </div>
+          </Button>
+        </ButtonsContainer>
+      </Footer>
+    </Container>
 
   );
   

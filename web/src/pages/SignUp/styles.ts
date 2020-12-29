@@ -16,7 +16,7 @@ export const Container = styled.div`
     align-items: stretch;
   background: ${({ theme }) => theme.colors.primary};
 
-  @media (min-width: 1100px) {
+  @media (min-width: 730px) {
       flex-direction: row;
   }
 `;
@@ -32,7 +32,7 @@ export const Content = styled.div`
 
     padding: 0 2.4rem;
 
-    @media (min-width: 1100px) {
+    @media (min-width: 730px) {
         width: 45%;
     }
 `;
