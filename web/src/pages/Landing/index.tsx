@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { 
   LandingImg, 
@@ -29,6 +29,8 @@ import Button from '../../components/Button';
 
 function Landing() {
   const [ totalConnections, setTotalConnections ] = useState(0);
+
+  const { push } = useHistory();
 
   useEffect(() => {
     api.get('connections').then(response => {
@@ -75,12 +77,12 @@ function Landing() {
         </InfoContainer>
 
         <ButtonsContainer>
-          <Button>
+          <Button onClick={() => push('/study')}>
             <StudyIcon/>
             Estudar
           </Button>
 
-          <Button>
+          <Button onClick={() => push('/give-classes')}>
             <GiveClassesIcon/>
             Dar aulas
           </Button>

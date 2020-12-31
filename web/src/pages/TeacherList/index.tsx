@@ -2,8 +2,8 @@ import React, { useState, FormEvent } from 'react';
 
 import PageHeader from '../../components/PageHeader';
 import TeacherItem, { Teacher } from '../../components/TeacherItem';
-import Input from '../../components/Input';
-import Select from '../../components/Select';
+import InputWithLabel from '../../components/InputWithLabel';
+import Select from '../../components/SimpleSelect';
 
 
 import './styles.css';
@@ -39,8 +39,6 @@ function TeacherList() {
         <Select 
           name="subject" 
           label="Matéria"
-          value={subject}
-          onChange={(e) => { setSubject(e.target.value) }}
           options={[
             { value: 'Artes', label: 'Artes'},
             { value: 'Biologia', label: 'Biologia'},
@@ -62,8 +60,6 @@ function TeacherList() {
         <Select 
         name="week_day" 
         label="Dia da semana"
-        value={week_day}
-        onChange={(e) => { setWeekDay(e.target.value) }}
         options={[
           { value: '0', label: 'Domingo'},
           { value: '1', label: 'Segunda-Feira'},
@@ -74,7 +70,7 @@ function TeacherList() {
           { value: '6', label: 'Sábado'},
         ]}
       />
-          <Input 
+          <InputWithLabel
             type="time" 
             name="time" 
             label="Hora"
