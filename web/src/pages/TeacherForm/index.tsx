@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { Scope, FormHandles } from '@unform/core';
 import { useHistory } from 'react-router-dom';
 
@@ -16,14 +16,12 @@ import {
   Form, 
   Block, 
   ProfileGroup, 
-  InputGroup, 
-  ScheduleContainer,
-  DeleteContainer,
-  Divisor,
+  InputGroup,
   SubmitContainer 
 } from './styles';
 
 import  ImageProfile  from '../../assets/images/euzasso.png'
+import Schedule from './components/Schedule';
 
 
 interface FormData {
@@ -64,6 +62,10 @@ const TeacherForm: React.FC = () => {
   ]);
 
   const { push } = useHistory();
+
+  const handleRemoveSchedule = useCallback((index: number) => {
+    setNewSchedules(state => state.filter(value => value !== index));
+  }, []); 
 
 
   const [scheduleItems, setScheduleItems] = useState([
@@ -163,51 +165,22 @@ const TeacherForm: React.FC = () => {
           <legend>
             Horários disponíveis
             <button 
+              onClick={() => {
+                setNewSchedules(state => [...state, state.length]);
+              }}
               type="button" 
-              onClick={addNewScheduleItem}>
+            >
               + Novo horário
             </button>
           </legend>
-          { scheduleItems.map((scheduleItem, index) => {
-            return (
-            <>
-              <ScheduleContainer>
-                <Select
-                  name="week_day"
-                  label="Dia da semana"
-                  placeholder="Selecione um dia da semana"
-                  options={[
-                    { value: '0', label: 'Domingo' },
-                    { value: '1', label: 'Segunda-feira' },
-                    { value: '2', label: 'Terça-feira' },
-                    { value: '3', label: 'Quarta-feira' },
-                    { value: '4', label: 'Quinta-feira' },
-                    { value: '5', label: 'Sexta-feira' },
-                    { value: '6', label: 'Sábado' },
-                  ]}
-                />
-                
-                <InputWithLabel
-                  name="from"
-                  label="Das"
-                  defaultValue="00:00"
-                  type="time"
-                />
 
-                <InputWithLabel 
-                  name="to"
-                  label="Até"
-                  defaultValue="00:00"
-                  type="time"
-                
-                />
-              </ScheduleContainer>
-              
-            </>
-              
-            );
-          })}
-          
+            
+
+          { newSchedules.map(value => (
+            <Scope key={value+1} path={`schedule[${value+1}]`}>
+              <Schedule removeSchedule={() => handleRemoveSchedule(value)}/>
+            </Scope>
+          ))}          
         </Block>
       </Form>
       <SubmitContainer>
