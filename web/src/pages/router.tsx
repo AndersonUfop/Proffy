@@ -9,6 +9,8 @@ import SucessForgotPassword from './ForgotPassword/Success';
 import Landing from './Landing';
 import TeacherList from './TeacherList';
 import TeacherForm from './TeacherForm';
+import Profile from './Profile';
+
 
 function Routes() {
   return (
@@ -21,6 +23,7 @@ function Routes() {
       <Route path="/landing" component={Landing} />
       <Route path="/study" component={TeacherList} />
       <Route path="/give-classes" component={TeacherForm} />
+      <Route path="/profile" component={Profile} />
     </BrowserRouter>
   );
 }

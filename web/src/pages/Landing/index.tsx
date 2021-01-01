@@ -44,7 +44,7 @@ function Landing() {
     <Container>
       <TopContent>
           <Header>
-            <Link to="/">
+            <Link to="/profile">
               <img src={ProfileImage} alt="Profile"/>
               <span>Nome</span>
             </Link>
