@@ -19,7 +19,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <HeaderContainer>
       <TopBarContainer>
-        <Link to="/">
+        <Link to="/landing">
           <img src={backIcon} alt="Voltar"/>
         </Link>
         <img src={logoImg} alt="Proffy"/>

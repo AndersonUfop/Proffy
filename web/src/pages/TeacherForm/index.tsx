@@ -174,7 +174,11 @@ const TeacherForm: React.FC = () => {
             </button>
           </legend>
 
-            
+            {
+              () => {
+                setNewSchedules(state => [...state, state.length]);
+              }
+            }
 
           { newSchedules.map(value => (
             <Scope key={value+1} path={`schedule[${value+1}]`}>
